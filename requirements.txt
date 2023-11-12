@@ -11,3 +11,5 @@ numpy==1.26.1
 requests==2.25.0
 urllib3==1.26.18
 Werkzeug==1.0.1
+beautifulsoup4
+whoosh

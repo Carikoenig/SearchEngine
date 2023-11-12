@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>search results</title>
+    </head>
+    <body>
+        <h1>Google</h1>
+        <p>
+            <form action='results' method='get'>
+                <input name='res' type='text'>
+            </form> 
+
+            <ul>
+            {% for item in res %}
+            <li> <a href= {{item}}> {{item}}</a></li>
+            {% endfor %}
+            <ul>
+
+        </p>
+    </body>
+</html>

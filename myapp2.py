@@ -34,7 +34,7 @@ def results():
         # Retrieving data
         with ix.searcher() as searcher:
             print('I searched')
-            # find entries with the words 'first' AND 'last'
+            # find entries with the words in res
             query = QueryParser("content", ix.schema).parse(request.args['res'])
             results = searcher.search(query)
             print(results)
@@ -44,7 +44,8 @@ def results():
             for r in results:
                 results_stack.append(r['title'])
             if results_stack == []:
-                results_stack = ['no results, try real Google instead']
+                results_stack = ['no results']
+        
         return render_template('results.html', res=results_stack)
 
 #general structure of forms

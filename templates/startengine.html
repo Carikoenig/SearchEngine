@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>ReverseApp</title>
-    </head>
-    <body>
-        <h1>Google</h1>
-        <form action='results' method='get'>
-            <input name='res' type='text'>
-        </form>      
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='Google_logo_almost.svg') }}" alt="Google logo almost">
+        </div>
+        <form action="results" method="GET" target="_blank" class="search-form">
+            <input type="text" name="res" class="search-input" autofocus>
+            <button type="submit" class="search-button">Search</button>
+        </form>
+
+    </div>
+</body>
 </html>

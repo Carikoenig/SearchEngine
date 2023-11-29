@@ -33,38 +33,16 @@ while url_stack:
                 if a['href'].endswith("html"):
                     new_url = urljoin(current_url, a['href'])
                     url_stack.append(new_url)
-                    visited_urls.add(new_url)
+            visited_urls.add(current_url)
 
         except requests.exceptions.RequestException as e:
             print(f"Error fetching {current_url}: {e}")
 
+    # print('url stack:', url_stack)
+    # print('visited_urls: ', visited_urls)
+
 # Commit the changes to the index
 writer.commit()
 
-# Query parser and search
-def search(query_string):
-    with ix.searcher() as searcher:
-        # Split the query into words
-        query_words = query_string.split()
-
-        # Build a query parser for both title and content fields
-        query_parser = MultifieldParser(["title", "content"], ix.schema)
-
-        # Initialize the query
-        queries = [query_parser.parse(word) for word in query_words]
-
-        # Perform the search and get the results
-        results = [searcher.search(q) for q in queries]
-
-        # Return URLs that are in every list
-        if results:
-            common_urls = set(results[0].docs()).intersection(*[set(r.docs()) for r in results[1:]])
-            return [hit["title"] for hit in common_urls]
-        else:
-            return []
 
 
-
-# writer.add_document(title=soup.text, content=link)
-
-writer.commit()

@@ -26,7 +26,7 @@
             <br><br>
             {% for item in res %}
                 {% set domain_name = item.split('//')[1].split('/')[0] %}
-                {% set content_preview = get_content_preview(item) %} {# You need to define the 'get_content_preview' function in your backend to fetch and return the content preview #}
+                {% set content_preview = get_content_preview(item) %}
                 <li>
                     <a href="{{ item }}">{{ domain_name }}</a>
                     <p>{{ content_preview }}</p>

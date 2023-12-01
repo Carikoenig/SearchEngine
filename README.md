@@ -1,5 +1,18 @@
 # Project 1: Build a search engine
 
+Acces to finished project: NEED TO BE CONNECTED TO UNIVERSITYS VPN!! 
+    
+    http://vm322.rz.uni-osnabrueck.de/user097/myapp2.wsgi/
+    
+OR: 
+
+    download this repository on local pc
+    create a venv and install the requirements with "pip install -r requirements.txt"
+    run the crawler with "python crawler.py" to create the index
+    run the flask app with "flask --app myapp2.py run"
+    
+# Instructions for creating project
+
 Build a search engine with all four components:
 
     Crawler

@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template
+import requests
+from bs4 import BeautifulSoup
 from whoosh.index import create_in
 from whoosh.fields import *
 from whoosh.qparser import QueryParser
@@ -9,6 +11,17 @@ from searching import search
 
 
 app = Flask(__name__)
+
+def get_content_preview(url):
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        # Extract the first 150 characters of the content
+        content_preview = ' '.join(soup.stripped_strings)[:150]
+        return content_preview
+    except Exception as e:
+        print(f"Error extracting content from {url}: {e}")
+        return "Error extracting content"
 
 @app.route("/")
 def startengine():

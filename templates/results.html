@@ -18,20 +18,21 @@
 
         <ul class="search-results">
             <!-- 'res' is a list of search results -->
-            <script>console.log(res)</script>
+            <!-- <script>console.log(res)</script> -->
             {% if res == [] %}
-            <p>No results</p> Try real Google instead: <a href="https://www.google.com">https://www.google.com</a></li>
+                <p>No results</p> Try real Google instead: <a href="https://www.google.com">https://www.google.com</a></li>
             {% else %}
-            Your results: 
-            <br><br>
-            {% for item in res %}
-                {% set domain_name = item.split('//')[1].split('/')[0] %}
-                {% set content_preview = get_content_preview(item) %}
-                <li>
-                    <a href="{{ item }}">{{ domain_name }}</a>
-                    <p>{{ content_preview }}</p>
-                </li>
-            {% endfor %}
+                {% for item in res %}
+                    {% set domain_name = item[1].split('//')[1].split('/')[0] %}
+                <div class="result">
+                    <li>
+                        <h4>{{ item[0] }}</h4>
+                        <a href="{{ item[1] }}">{{ domain_name }}</a>
+                        <p>{{ item[2] }}</p>
+                    </li>
+                </div>
+                    
+                {% endfor %}
             {% endif %}
         </ul>
     </div>

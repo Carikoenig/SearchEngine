@@ -12,16 +12,6 @@ from searching import search
 
 app = Flask(__name__)
 
-def get_content_preview(url):
-    try:
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        # Extract the first 150 characters of the content
-        content_preview = ' '.join(soup.stripped_strings)[:150]
-        return content_preview
-    except Exception as e:
-        print(f"Error extracting content from {url}: {e}")
-        return "Error extracting content"
 
 @app.route("/")
 def startengine():
@@ -33,8 +23,8 @@ def results():
     if not 'res' in request.args:
         return 'You tried to hack me'
     else:
-        titles = search(request.args['res'])
-        return render_template('results.html', res=titles)
+        title_url_content = search(request.args['res'])
+        return render_template('results.html', res=title_url_content)
     
 
 @app.errorhandler(500)

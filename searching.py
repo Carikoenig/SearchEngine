@@ -5,12 +5,13 @@ ix = index.open_dir('indexdir')
 
 # Query parser and search
 def search(query_string):
+    
     with ix.searcher() as searcher:
         # Split the query into words
         query_words = query_string.split()
 
         # Build a query parser for both title and content fields
-        query_parser = MultifieldParser(["title", "content"], ix.schema)
+        query_parser = MultifieldParser(["title", "url", "content"], ix.schema)
 
         # Initialize the query
         queries = [query_parser.parse(word) for word in query_words]
@@ -27,8 +28,12 @@ def search(query_string):
         # Find the intersection of document IDs
         common_doc_ids = set.intersection(*doc_ids_sets)
 
+        for doc_id in common_doc_ids:
+            stored_fields = searcher.stored_fields(doc_id)
+            print(f"Stored Fields for Doc ID {doc_id}: {stored_fields}")
+
         # Retrieve titles for common document IDs
-        common_titles = [searcher.stored_fields(doc_id)["title"] for doc_id in common_doc_ids]
+        common_titles = [[searcher.stored_fields(doc_id)["title"],  searcher.stored_fields(doc_id)["url"], searcher.stored_fields(doc_id)["content"]] for doc_id in common_doc_ids]
 
         return common_titles
 

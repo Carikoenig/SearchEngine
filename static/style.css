@@ -11,6 +11,15 @@ body {
     margin: 100px auto;
     text-align: center;
 }
+
+.result {
+    margin-top: 40px;
+
+}
+.result :hover {
+    background-color: #fcfcfc;
+}
+
 .logo {
     margin-bottom: 20px;
 }
